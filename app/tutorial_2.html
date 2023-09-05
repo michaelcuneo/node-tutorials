@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Fira+Code&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/tutorial_1">NPM Tutorial 1 - Hello World!</a>
+      <a href="/tutorial_2">NPM Tutorial 2 - Routing</a>
+      <h2>NPM Tutorial 1 - Bundler!</h2>
+      <div class="steps">
+        <h3>Installing Webpack</h3>
+        <p>Bundling up a project so that it contains the entry point, services, assets, and all dependencies in a distributable package requires one of many different suitable bundlers, like webpack, browserify, esbuild, rollup, parcel, and my favourite which somehow isn't in this list... VITE</p>
+        <p>Of course you could write your own bundler, which sources and minimises all of the different javascript files, modules & assets in your project and pushes them into a distribution folder, and perfects every single little load time bottlneck, but when there are already projects like webpack around with THOUSANDS of stars on GitHub, trusted by React and Vue and other Framework Developers; so there is not much point reinventing the wheel, unless like Rich Harris you find something inhernently and disturbingly wrong with what already exists, and write something all on your own, (SvelteKit)</p>
+        <p>For this project I will add Webpack</p>
+        <p>The first step you'll need to do is install it with the following command</p>
+        <div class="copy-link">
+          <input type="text" class="copy-link-input" value="npm i webpack webpack-cli --save-dev" disabled>
+          <button type="button" class="copy-link-button" onclick="copyCommand('npm i webpack webpack-cli --save-dev')">
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <p>We are saving webpack as a devDependency because after it is used for bundling it's not required for the distributable runtime.</p>
+        <p>After adding <i>webpack</i> and <i>webpack-cli</i> you will have two new additions in your package.json under devDepenencies.</p>
+      </div>
+      <div class="steps">
+        <h3>Add an area to output your build & test the output directory</h3>
+        <p>Create a folder to export the build to</p>
+        <div class="copy-link">
+          <input type="text" class="copy-link-input" value="mkdir dist" disabled>
+          <button type="button" class="copy-link-button" onclick="copyCommand('mkdir dist')">
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <p>Test webpack.</p>
+      </div>
+    </div>
+    <!-- Entry Point for the Application -->
+    <script src="./index.js"></script>
+    <script>hljs.highlightAll();</script>
+  </body>
+</html>
