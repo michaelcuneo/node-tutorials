@@ -1,5 +1,10 @@
 import http from "http";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let server;
 let host = "0.0.0.0"; // This IP range means 'EVERYWHERE', which will respond to LocalHost and FQDNs.
@@ -11,42 +16,42 @@ let css;
 let js;
 let png;
 
-fs.readFile("./App/index.css", (err, data) => {
+fs.readFile(__dirname + '/App/index.css', (err, data) => {
   if (err) {
     throw err;
   }
   css = data;
 });
 
-fs.readFile("./App/index.js", (err, data) => {
+fs.readFile(__dirname + '/App/index.js', (err, data) => {
   if (err) {
     throw err;
   }
   js = data;
 });
 
-fs.readFile("./App/img/cv_tutorial_1.png", (err, data) => {
+fs.readFile(__dirname + '/App/img/cv_tutorial_1.png', (err, data) => {
   if (err) {
     throw err;
   }
   png = data;
 });
 
-fs.readFile("./App/index.html", (err, data) => {
+fs.readFile(__dirname + '/App/index.html', (err, data) => {
   if (err) {
     throw err;
   }
   index = data;
 });
 
-fs.readFile("./App/tutorial_1.html", (err, data) => {
+fs.readFile(__dirname + '/App/tutorial_1.html', (err, data) => {
   if (err) {
     throw err;
   }
   tutorial_1 = data;
 });
 
-fs.readFile("./App/tutorial_2.html", (err, data) => {
+fs.readFile(__dirname + '/App/tutorial_2.html', (err, data) => {
   if (err) {
     throw err;
   }

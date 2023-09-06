@@ -1,1 +1,4 @@
-node_modules
+# Node.JS
+dist
+node_modules/
+package-lock.json
