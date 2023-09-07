@@ -1,22 +1,18 @@
 import path from "path";
-import { fileURLToPath } from "url";
+import nodeExternals from "webpack-node-externals";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
-
-let DEBUG;
-
-if (process.env.NODE_ENV === "production") {
-  DEBUG = false;
-} else {
-  DEBUG = true;
-}
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const DEBUG = true;
+
 export default {
   entry: "./src/server.js",
+  devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: DEBUG ? "bundle.js" : "bundle.min.js"
@@ -28,19 +24,48 @@ export default {
   },
   plugins: [
     new NodePolyfillPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: "./src/App/index.html",
+      publicPath: '/',
+      filename: "./index.html",
+      excludeChunks: [ 'server' ]
+    })
+  ],
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  externals: [
+    nodeExternals()
   ],
   module: {
     rules: [
       {
+        // Transpiles ES6-8 into ES5
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
-	        loader: 'babel-loader',
-	        options: {
-	          presets: ['@babel/preset-env'],
-	        },
-        },
+          loader: "babel-loader"
+        }
+      },
+      {
+        // Loads the javacript into html template provided.
+        // Entry point is set below in HtmlWebPackPlugin in Plugins 
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            //options: { minimize: true }
+          }
+        ]
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+       test: /\.(png|svg|jpg|gif)$/,
+       use: ['file-loader']
       }
     ],
   },
@@ -55,6 +80,6 @@ export default {
   target: "web",
   mode: "development",
     devServer: {
-    hot: true,
-  },
+      hot: true,
+    },
 };
