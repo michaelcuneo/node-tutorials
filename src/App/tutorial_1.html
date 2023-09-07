@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="./index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Fira+Code&family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Fira+Code&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
   </head>
@@ -20,105 +29,269 @@
       </div>
       <div class="steps">
         <h3>Create a project folder</h3>
-        <p>Make a Folder and call it the same name that you would like the project to be called. For this example project, I used cv-tutorial.</p>
+        <p>
+          Make a Folder and call it the same name that you would like the
+          project to be called. For this example project, I used cv-tutorial.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="mkdir cv-tutorial" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('mkdir cv-tutorial')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="mkdir cv-tutorial"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('mkdir cv-tutorial')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
         <p>Change to the cv-tutorial directory</p>
-          <div class="copy-link">
-            <input type="text" class="copy-link-input" value="cd cv-tutorial" disabled>
-            <button type="button" class="copy-link-button" onclick="copyCommand('cd cv-tutorial')">
-              <span class="material-icons">content_copy</span>
-            </button>
-          </div>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="cd cv-tutorial"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('cd cv-tutorial')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
       </div>
       <div class="steps">
         <h3>Initialise a package.json</h3>
         <p>From the folder <i>cv-tutorial</i>, run</p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="npm init" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('npm init')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="npm init"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('npm init')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>This command will guide you through a short process and create a <i>package.json</i> in the folder for you.</p>
-        <p>I have used default settings for all questions except entry point, and author. You can ignore the 'test command' question and just hit enter, we will remove this later.
-        <p>For entry point use <i>app/index.js</i> to make it look tiddier, we will create the app folder later...</p>
-        <p>At the end of all the questions it will say <i>Is this o.k.? (yes)</i> ... Just hit enter and we're onto step 3.</p>
-        <p>You don't actually need a <i>package.json</i> to make a node application, but it helps to organise everything and allows you to publish to NPM, and even if you only add one package that someone else has created, i.e. <i>express</i> you will need a package.json to maintain the dependencies of <i>express</i></i></p>
-        <p>If you do install other NPM packages to your project they will appear in package.json under either dependencies, devDependencies, or sometimes even peerDependencies.</p>
-        <p><i>dependencies</i> are required at Runtime. i.e. <i>express - for API services.</i></p>
-        <p><i>devDependencies</i> are not need to be loaded when it is in Production Mode. i.e. <i>eslint - for linting.</i></p>
-        <p><i>peerDependencies</i> need to be installed onto the system environment. i.e. <i>react - React Runtime.</i></p>
+        <p>
+          This command will guide you through a short process and create a
+          <i>package.json</i> in the folder for you.
+        </p>
+        <p>
+          I have used default settings for all questions except entry point, and
+          author. You can ignore the 'test command' question and just hit enter,
+          we will remove this later.
+        </p>
+        <p>
+          For entry point use <i>app/index.js</i> to make it look tiddier, we
+          will create the app folder later...
+        </p>
+        <p>
+          At the end of all the questions it will say
+          <i>Is this o.k.? (yes)</i> ... Just hit enter and we're onto step 3.
+        </p>
+        <p>
+          You don't actually need a <i>package.json</i> to make a node
+          application, but it helps to organise everything and allows you to
+          publish to NPM, and even if you only add one package that someone else
+          has created, i.e. <i>express</i> you will need a package.json to
+          maintain the dependencies of <i>express</i>
+        </p>
+        <p>
+          If you do install other NPM packages to your project they will appear
+          in package.json under either dependencies, devDependencies, or
+          sometimes even peerDependencies.
+        </p>
+        <p>
+          <i>dependencies</i> are required at Runtime. i.e.
+          <i>express - for API services.</i>
+        </p>
+        <p>
+          <i>devDependencies</i> are not need to be loaded when it is in
+          Production Mode. i.e. <i>eslint - for linting.</i>
+        </p>
+        <p>
+          <i>peerDependencies</i> need to be installed onto the system
+          environment. i.e. <i>react - React Runtime.</i>
+        </p>
       </div>
       <div class="steps">
         <h3>Uprade the package.json to ES Modules</h3>
-        <p>The default for NodeJS is to import using the legacy CommonJS Module system, but it has a few drawbacks vs the new ES Modules System</p>
+        <p>
+          The default for NodeJS is to import using the legacy CommonJS Module
+          system, but it has a few drawbacks vs the new ES Modules System
+        </p>
         <i>1. CommonJS has support for very old legacy packages.</i>
-        <i>2. CommonJS Imports are only allowed in the very first part of a file.</i>
+        <i
+          >2. CommonJS Imports are only allowed in the very first part of a
+          file.</i
+        >
         <i>3. CommonJS Module loading is Syncronous.</i>
-        <p>ES Modules are best to start with when making a brand new project, but CommonJS would be best if we were maintaining an older project.</p>
+        <p>
+          ES Modules are best to start with when making a brand new project, but
+          CommonJS would be best if we were maintaining an older project.
+        </p>
         <i>1. ES Modules allows importing all CommonJS modules.</i>
         <i>2. ES Modules allows Loading from URL's</i>
         <i>3. ES Modules can be executed at parse time, and runtime.</i>
-        <i>4. ES Modules require explicit file extension i.e. './directory/index.js'</i>
-        <i>5. ES Modules are Asyncronous. You can load up many modules without having to wait for the old ones to load up.</i>
-        <p>To upgrade the package.json to support modules all we need to do is open up <i>package.json</i> and add the following directive to the JSON.</p>
+        <i
+          >4. ES Modules require explicit file extension i.e.
+          './directory/index.js'</i
+        >
+        <i
+          >5. ES Modules are Asyncronous. You can load up many modules without
+          having to wait for the old ones to load up.</i
+        >
+        <p>
+          To upgrade the package.json to support modules all we need to do is
+          open up <i>package.json</i> and add the following directive to the
+          JSON.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value='"type": "module"' disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('npm init')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value='"type": "module"'
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('npm init')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>When you're working in an ES Modules based system you can replace all <i>const var = require('module');</i> with the easier to read <i>import module from "module";</i></p>
-        <p>But if you're pulling in a named import from within a module it's <i>import { function } from "module";</i></p>
-        <p>There are other imports like <i>import * as namespace from "module";</i> for namespace imports, but we'll get to that in a future tutorial.</p>
+        <p>
+          When you're working in an ES Modules based system you can replace all
+          <i>const var = require('module');</i> with the easier to read
+          <i>import module from "module";</i>
+        </p>
+        <p>
+          But if you're pulling in a named import from within a module it's
+          <i>import { function } from "module";</i>
+        </p>
+        <p>
+          There are other imports like
+          <i>import * as namespace from "module";</i> for namespace imports, but
+          we'll get to that in a future tutorial.
+        </p>
       </div>
       <div class="steps">
         <h3>Create some structure</h3>
-        <p>Now that we have a <i>package.json</i> file in the root of <i>cv-tutorial</i> we can start to structure the app a little bit.</p>
+        <p>
+          Now that we have a <i>package.json</i> file in the root of
+          <i>cv-tutorial</i> we can start to structure the app a little bit.
+        </p>
         <p>Create a folder inside cv-tutorial named <i>app</i></p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="mkdir app" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('mkdir app')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="mkdir app"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('mkdir app')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
       </div>
       <div class="steps">
         <h3>Add a run script</h3>
-        <p>Any command you add to the <i>script</i> section of <i>package.json</i> can be executed using <code>npm run [scriptname]</code>.
-        <p>This script area is usually packed with many important functions for testing, bundling, building, when you're working with frameworks like React, Svelte, Vue, or even Vanilla JS if you write a script yourself. The script can be anything, it could run node, with vanilla.js, or an npx package, or whatever you need it to do.</p>
-        <p>Inside <i>package.json</i> we want to delete the command <i>test</i> and replace it with <i>start</i></p>
+        <p>
+          Any command you add to the <i>script</i> section of
+          <i>package.json</i> can be executed using
+          <code>npm run [scriptname]</code>.
+        </p>
+        <p>
+          This script area is usually packed with many important functions for
+          testing, bundling, building, when you're working with frameworks like
+          React, Svelte, Vue, or even Vanilla JS if you write a script yourself.
+          The script can be anything, it could run node, with vanilla.js, or an
+          npx package, or whatever you need it to do.
+        </p>
+        <p>
+          Inside <i>package.json</i> we want to delete the command
+          <i>test</i> and replace it with <i>start</i>
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value='"start": "node frontend/server.js"' disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand()">
+          <input
+            type="text"
+            class="copy-link-input"
+            value='"start": "node frontend/server.js"'
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand()"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>The start script you just made can be executed via
+        <p>The start script you just made can be executed via</p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="npm run start" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('npm run start')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="npm run start"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('npm run start')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>But we cannot run it yet, because <i>app/server.js</i> does not exist.</p>
+        <p>
+          But we cannot run it yet, because <i>app/server.js</i> does not exist.
+        </p>
       </div>
       <div class="steps">
-        <h3>After creating the package.json and the app folder, and the start script, you should end up with something like this</h3>
-        <img src="./img/cv_tutorial_1.png" alt="cv_tutorial_1">
+        <h3>
+          After creating the package.json and the app folder, and the start
+          script, you should end up with something like this
+        </h3>
+        <img src="./img/cv_tutorial_1.png" alt="cv_tutorial_1" />
       </div>
       <div class="steps">
         <h3>Writing app/index.js</h3>
-        <p>This is a simple 'copy' function which will copy any code snippets from this page when you hit the copy button beside them.</p>
-        <p>I have replicated this into the <i>Hello World!</i> example for this tutorial, when you're finished you will have a copyable input box.</p>
+        <p>
+          This is a simple 'copy' function which will copy any code snippets
+          from this page when you hit the copy button beside them.
+        </p>
+        <p>
+          I have replicated this into the <i>Hello World!</i> example for this
+          tutorial, when you're finished you will have a copyable input box.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="touch app/index.js" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('touch app/index.js')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="touch app/index.js"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('touch app/index.js')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
@@ -132,10 +305,24 @@ const copyCommand = id => {
       </div>
       <div class="steps">
         <h3>Writing app/server.js</h3>
-        <p>If we write a super simple script, which will leverage two different node packages <i>http</i> and <i>fs</i> we can load up files and serve them to the browser on the assigned port. Node Defaults to Port 8080 but I have changed this to 3000 because I felt like it.</p>
+        <p>
+          If we write a super simple script, which will leverage two different
+          node packages <i>http</i> and <i>fs</i> we can load up files and serve
+          them to the browser on the assigned port. Node Defaults to Port 8080
+          but I have changed this to 3000 because I felt like it.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="touch app/server.js" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('touch app/server.js')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="touch app/server.js"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('touch app/server.js')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
@@ -207,8 +394,17 @@ server.listen(port, host, () => {
         <h3>Writing app/index.css</h3>
         <p>MAKE IT PRETTY!</p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="touch app/index.css" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('touch app/index.css')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="touch app/index.css"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('touch app/index.css')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
@@ -313,10 +509,22 @@ i {
       </div>
       <div class="steps">
         <h3>Writing app/index.html</h3>
-        <p>I will seperate this later into chunks with explanations of how and why!</p>
+        <p>
+          I will seperate this later into chunks with explanations of how and
+          why!
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="touch app/index.html" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('touch app/index.html')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="touch app/index.html"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('touch app/index.html')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
@@ -358,18 +566,44 @@ i {
       </div>
       <div class="steps">
         <h3>Optional - Installing NODEMON</h3>
-        <p>Optionally, so that you don't have to close the node script and reload the node script every time we want to see the changes after you hit save in a project, you can load up an npm module called <i>nodemon</i></p>
-        <p>This will be the first module that you'll be using in this project. Because this is a global node module that you can run with any project you should install it globally, with the <i>-g</i> option.</i></p>
-        <p>If you run the following command it will install nodemon to the global environment.
+        <p>
+          Optionally, so that you don't have to close the node script and reload
+          the node script every time we want to see the changes after you hit
+          save in a project, you can load up an npm module called <i>nodemon</i>
+        </p>
+        <p>
+          This will be the first module that you'll be using in this project.
+          Because this is a global node module that you can run with any project
+          you should install it globally, with the <i>-g</i> option.
+        </p>
+        <p>
+          If you run the following command it will install nodemon to the global
+          environment.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="npm i nodemon -g" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('npm i nodemon -g')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="npm i nodemon -g"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('npm i nodemon -g')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>To make it actually be utilised in this project, you will want to make a few changes to the project.</p>
-        <p>In your <i>package.json</i> make a new script, in the script area under "start" called dev <i>"dev": "nodemon"</i>
-          <pre>
+        <p>
+          To make it actually be utilised in this project, you will want to make
+          a few changes to the project.
+        </p>
+        <p>
+          In your <i>package.json</i> make a new script, in the script area
+          under "start" called dev <i>"dev": "nodemon"</i>
+        </p>
+        <pre>
           <code class="language-json">
 "scripts": {
   "start": "nodemon app/server.js",
@@ -377,14 +611,27 @@ i {
 },
           </code>
         </pre>
-        <p>Then create a file in the root of <i>cv_tutorial</i> called <i>nodemon.json</i> which will instruct nodemon to follow it's configuration contained.</p>
+        <p>
+          Then create a file in the root of <i>cv_tutorial</i> called
+          <i>nodemon.json</i> which will instruct nodemon to follow it's
+          configuration contained.
+        </p>
         <div class="copy-link">
-          <input type="text" class="copy-link-input" value="touch nodemon.json" disabled>
-          <button type="button" class="copy-link-button" onclick="copyCommand('touch nodemon.json')">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="touch nodemon.json"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('touch nodemon.json')"
+          >
             <span class="material-icons">content_copy</span>
           </button>
         </div>
-        <p>All you need to place in this file is ... </p>
+        <p>All you need to place in this file is ...</p>
         <pre>
           <code class="language-json">
 {
@@ -392,16 +639,33 @@ i {
 }
           </code>
         </pre>
-        <p>This will instruct nodemon to listen for changes to any html, css, or js files, you can add any extensions that you like.</p>
-        <p>Now when you run <i>npm run dev</i> it will run the development script that you created, and whenever you hit save in your IDE the nodemon will restart the node service and you can see your updated changes in the browser.</p>
-        <p><i>Note: Because you installed nodemon Globally, it will not appear in your package.json as a dependency at all, and it will not create a node_modules folder. We will eventually add a devDependency in a future tutorial.</i></p>
+        <p>
+          This will instruct nodemon to listen for changes to any html, css, or
+          js files, you can add any extensions that you like.
+        </p>
+        <p>
+          Now when you run <i>npm run dev</i> it will run the development script
+          that you created, and whenever you hit save in your IDE the nodemon
+          will restart the node service and you can see your updated changes in
+          the browser.
+        </p>
+        <p>
+          <i
+            >Note: Because you installed nodemon Globally, it will not appear in
+            your package.json as a dependency at all, and it will not create a
+            node_modules folder. We will eventually add a devDependency in a
+            future tutorial.</i
+          >
+        </p>
       </div>
       <div class="steps">
         <h3>Closing up - <i>Will write this soon</i></h3>
       </div>
     </div>
     <!-- Entry Point for the Application -->
-    <script src="./index.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script type="module" src="./index.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>

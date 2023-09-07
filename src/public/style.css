@@ -71,8 +71,8 @@ div.steps {
 
 .copy-link-button {
   flex-shrink: 0;
-  width: var(--height);
-  height: var(--height);
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
