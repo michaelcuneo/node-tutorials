@@ -1,3 +1,3 @@
-export const copyCommand = (id) => {
+const copyCommand = (id) => {
   navigator.clipboard.writeText(id);
 };
