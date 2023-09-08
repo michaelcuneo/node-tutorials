@@ -21,6 +21,10 @@ app.get("/tutorial_2", (req, res) => {
   res.sendFile(path.join(__dirname, "/App/tutorial_2.html"));
 });
 
+app.get("/tutorial_3", (req, res) => {
+  res.sendFile(path.join(__dirname, "/App/tutorial_3.html"));
+});
+
 app.listen(3050, () => {
   console.log(`App listening to 3050....`);
 });
