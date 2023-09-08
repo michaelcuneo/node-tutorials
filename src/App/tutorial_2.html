@@ -24,7 +24,10 @@
       <a href="/tutorial_1">NPM Tutorial 1 - Hello World!</a>
       <a href="/tutorial_2">NPM Tutorial 2 - Reverse Proxy!</a>
       <a href="/tutorial_3">NPM Tutorial 3 - TBA</a>
-      <h2>NPM Tutorial 3 - Reverse Proxy!</h2>
+      <div class="top">
+        <a href="/"><span class="material-icons">arrow_back</span></a>
+        <h2>NPM Tutorial 2 - Reverse Proxy!</h2>
+      </div>
       <div class="steps">
         <h3>Intro</h3>
         <p>
@@ -36,52 +39,139 @@
       <div class="steps">
         <h3>Set up Apache with a new host.</h3>
         <p>Login to HALIDE via SSH to your local user account.</p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="ssh aiden@halide.michaelcuneo.com.au"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('ssh aiden@halide.michaelcuneo.com.au')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>Change directory to /etc/apache/sites-available</p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="cd /etc/apache/sites-available"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('cd /etc/apache/sites-available')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>
-          Duplicate an existing site with cp and change all of the configuration
-          to suit running a reverse proxy from Port 80 to Port 3000 on a node.js
-          application. For this example I will be using the Reverse Proxy
-          example to host this tutorial set.
+          Duplicate an existing site config with <i>cp</i> and change all of the
+          configuration to suit running a reverse proxy from Port 80 to a port
+          of your choosing which will be the same port that is running for the
+          node.js application. For this example I will be using port
+          <i>3050</i>. Replace the <i>[prefix]</i>, and <i>[appname]</i> with
+          the next host number, and name of the subdomain that you want to use.
+          In this case I used <i>009</i> and <i>node.michaelcuneo.com.au</i>, if
+          you want to host this under aidebbc.com.au use those values instead.
+          i.e.
+          <i>002-app.aidenbc.com.au.conf</i>
         </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo cp 001-halide-michaelcuneo-com-au.conf [prefix]-[appname]-[domain].conf"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo cp 001-halide-michaelcuneo-com-au.conf [prefix]-[appname]-[domain].conf')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>
-          sudo cp 001-halide-michaelcuneo-com-au.conf
-          009-node-michaelcuneo.com.au.conf
+          Open up <i>[prefix]-[appname]-[domain].conf</i> with your favourite
+          editors and edit it to change all of the values to suit a reverse
+          proxied setup.
         </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo nano [prefix]-[appname]-[domain].conf"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo nano [prefix]-[appname]-[domain].conf')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>
-          Open up 009-node-michaelcuneo.com.au.conf and edit it to change all of
-          the values to suit reverse proxying.
-        </p>
-        <p>
-          You want to keep the Virtual Host receiving *:80, because you are
-          listening to incoming connections on Port 80
+          You want to keep the <i>VirtualHost</i> receiving <i>*:80</i>, because
+          you are listening to incoming connections on <i>Port 80</i>
         </p>
         <p>Server Admin is your own personal email.</p>
         <p>
-          Server Name and Server Alias should both be set to the subdomain that
-          you want to use under michaelcuneo.com.au ... or if you're setting
-          this up for your own services, [appname].aidenbc.com.au
+          <i>Server Name</i> and <i>Server Alias</i> should both be set to the
+          subdomain that you want to use under michaelcuneo.com.au or
+          aidenbc.com.au
         </p>
         <p>
-          Document Root can be removed because a node.JS does not have one... it
-          manages this using it's own runtime services.
+          <i>Document Root</i> can be removed because there are no static
+          folders to be served from a a node.JS application, it manages this
+          using it's own runtime service.
         </p>
         <p>
-          Error Log and Custom log can be renamed to suit the service you're
-          running for Customised dedicated logging.
+          <i>Error Log</i> and <i>Custom log</i> can be renamed to suit the
+          service you're running for your own logs.
         </p>
         <p>
           You want to add these three lines to the config to support reverse
-          proxying. For this project I have used the port 3050 so that it
-          doesn't interfere with my development that generally sits on 3000.
-          ProxyPreserveHost On ProxyPass / http://localhost:3050/
-          ProxyPassReverse / http://localhost:3050/
+          proxying.
         </p>
+        <pre>
+          <code>
+ProxyPreserveHost On
+ProxyPass / http://localhost:3050/
+ProxyPassReverse / http://localhost:3050/
+          </code>
+        </pre>
         <p>
-          You can also remove any rewrite conditions so that the resulting file
-          looks something like this one that I made for this tutorial hosting.
-          The Rewrite Conditions will be re-added later when Certbot does it
-          business.
+          You can also remove any rewrite conditions, these conditions will be
+          re-added later to suit the file by certbot when we grab an SSL
+          certificate. When you're done you should end up with something that
+          looks very similar to this...
         </p>
+        <pre>
+          <code>
+&lt;VirtualHost *:80&gt;
+        ServerAdmin me@michaelcuneo.com.au
+        ServerName node.michaelcuneo.com.au
+        ServerAlias node.michaelcuneo.com.au
+
+        ProxyPreserveHost On
+        ProxyPass / http://localhost:3050/
+        ProxyPassReverse / http://localhost:3050/
+
+        ErrorLog ${APACHE_LOG_DIR}/node-michaelcuneo-com-au-error.log
+        CustomLog ${APACHE_LOG_DIR}/node-michaelcuneo-com-au-access.log combined
+&lt;/VirtualHost&gt;
+          </code>
+        </pre>
+      </div>
+      <div class="steps">
+        <h3>Enable the new Config & Restart the Apache Service</h3>
         <p>
           After you have a site config completed you have to enable it with the
           following commands, a2ensite stands for Apache 2 Enable Site, and will
@@ -89,61 +179,135 @@
           readable by Apache to launch when restarted. Then restart apache with
           the System Controller.
         </p>
-        <p>sudo a2ensite example.com sudo systemctl restart apache2</p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo a2ensite [prefix]-[appname]-[domain].conf"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo a2ensite [prefix]-[appname]-[domain].conf')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo systemctl restart apache2"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo systemctl restart apache2')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>
-          Because we want SSL support, we can easily add a new config that adds
-          a VirtualHost listening on *:443 and provides Security Certificates
-          with CERTBOT, but before we can do this we have to have the domain
-          resolvable so we have to login to AWS and add a Route53 Subdomain for
-          this app, so that when you hit node.michaelcuneo.com.au the Route53
-          service sends the requests to the IP of the server,
-          michaelcuneo.com.au or aidenbc.com.au.
+          Because we want <i>SSL support</i>, we can easily add a new config
+          that adds a <i>VirtualHost</i> listening on <i>*:443</i> and provides
+          Security Certificates with CERTBOT, but before we can do this we have
+          to have the domain resolvable so we have to login to <i>AWS</i> and
+          add a <i>Route53 Subdomain</i> for this app, so that when you hit the
+          domain, in my case... <i>node.michaelcuneo.com.au</i> the
+          <i>Route53</i> service sends the requests to the IP of the server,
+          <i>michaelcuneo.com.au</i> or <i>aidenbc.com.au</i>. Even though we
+          both share the same IP Address for both of our domains, the apache
+          config detects who's aiming for what and routes everything to the
+          right areas.
+        </p>
+      </div>
+      <div class="steps">
+        <h3>Get server IP</h3>
+        <p>
+          Before we login to <i>AWS</i> we need to find out what the current IP
+          of HALIDE is... using the same script that we use in the 'IP Update
+          scripts' for our other domain endpoints. <i>curl ifconfig.me</i>
+        </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="curl ifconfig.me"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('curl ifconfig.me')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+      </div>
+      <div class="steps">
+        <h3>Login to AWS and create a new subdomain</h3>
+        <p>
+          Now that we have an IP to add to the <i>Route53</i> Subdomain. We can
+          login to <i>AWS</i>
         </p>
         <p>
-          Before we login to Amazon we need to find out what the current IP of
-          HALIDE is... using the same script that we use in the 'IP Update
-          scripts' for our other domain endpoints. curl ifconfig.me
-        </p>
-        <p>
-          Now that we have an IP to add to the Route53 Subdomain. We can login
-          to AWS.
-        </p>
-        <p>
-          After you're in to AWS search for Route53 up the top area, and you can
-          get to Route53
+          After you're in to AWS search for <i>Route53</i> up the top area, and
+          you can get to Route53
         </p>
         <p>
           For our service you'll see that we have 7 hosted zones. If you click
-          on Hosted Zones you'll see we have quite a few. You want to edit
-          michaelcuneo.com.au or aidenbc.com.au
+          on <i>Hosted Zones</i> you'll see we have quite a few. You want to
+          edit <i>michaelcuneo.com.au</i> or <i>aidenbc.com.au</i>
         </p>
         <p>
-          I clicked on michaelcuneo.com.au and I have a lot of records... 28 to
-          be exact... some are to route the MX mailservice to Google Mail, some
-          are for projects, some are to validate that I own michaelcuneo.com.au
+          For this node service, I clicked on <i>michaelcuneo.com.au</i> and I
+          have a lot of records... 28 to be exact... some are to route the
+          <i>MX mailservice to Google Mail</i>, some are for <i>projects</i>,
+          some are to <i>validate that I own michaelcuneo.com.au</i>
         </p>
-        <p>To add a new subdoain just clicked Create Record</p>
+        <p>To add a new subdoain just click <i>Create Record</i></p>
         <p>
-          Under subdomain this is where you write the name of the app like you
-          did in the configuration for Apache, [appname].michaelcuneo.com.au or
-          [appname].aidenbc.com.au
+          Under <i>subdomain</i> this is where you write the name of the app
+          like you did in the configuration for Apache, [appname]
         </p>
         <p>
-          You want the record type to be an A Record, and you want the value to
-          be the IP that you got from the curl ifconfig.me command. This IP is
-          currently 114.76.75.20. Every other setting you can leave default, and
-          hit 'Create Record'
+          You want the record type to be an <i>A Record,</i> and you want the
+          value to be the IP that you got from the
+          <i>curl ifconfig.me</i> command. The IP for HALIDE is currently
+          <i>114.76.75.20</i>. Every other setting you can leave default, and
+          hit <i>'Create Record'</i>
         </p>
         <p>
           If you wait about 30 seconds now... ping [appname].michaelcuneo.com.au
-          or [appname].aidenbc.com.au should resolve to 114.76.75.20
+          or [appname].aidenbc.com.au should resolve to <i>114.76.75.20</i>
         </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="ping [appname].michaelcuneo.com.au"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('ping [appname].michaelcuneo.com.au')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+      </div>
+      <div class="steps">
+        <h3>Get SSL Certificate using CERTBOT</h3>
         <p>
-          Now that the domain is resolving to the HALIDE server, we can use the
-          Certbot to receive a valid SSL certification from the CERTBOT
-          endpoint. Part of this validation requires that CERTBOT can see that
-          we own the domain, and if the domain does not point to where we're
-          running CERTBOT from it will deny the validation and we get no SSL.
+          Now that the domain is resolving to the HALIDE server, we can use
+          <i>certbot</i> to receive a valid <i>SSL certificate</i> from the
+          certbot endpoint. Part of this validation requires that certbot can
+          see that we own the domain, and if the domain does not point to where
+          we're running certbot from it will deny the validation and we get no
+          SSL.
         </p>
         <p>
           Getting a config for SSL over port *:443 is as simple as running sudo
@@ -155,11 +319,61 @@
           restart apache to allow it to read the new configuration for SSL. sudo
           systemctl restart apache2
         </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo certbot"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo certbot')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="sudo systemctl restart apache2"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('sudo systemctl restart apache2')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
         <p>
           At this point if you go to [appname].michaelcuneo.com.au or
           [appname].aidenbc.com.au it should tell you that the service in
           unavailable because nothing is running on port 3050.
         </p>
+        <p>
+          If you run the service with node ./srv/server.js and open
+          [appname].endpoint again... you will see your App!
+        </p>
+        <p>
+          Having to start and stop your app all the time when you make changes
+          can be a bit annoying so you might want to use screen to run the
+          service, but if you want to go a step further and make it a proper
+          actual functional service as part of the whole Ubuntu environment, we
+          can write a service.
+        </p>
+        <p>
+          To write a service, we need to add a script to /etc/systemd/system
+          called [appname].service
+        </p>
+        <p>
+          After writing this script you cannot run it until you reload the
+          service daemon with sudo systemctl daemon-reload
+        </p>
+        <p>Then run sudo systemctl restart node</p>
       </div>
     </div>
     <!-- Entry Point for the Application -->
