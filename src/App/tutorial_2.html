@@ -22,133 +22,144 @@
   <body>
     <div class="container">
       <a href="/tutorial_1">NPM Tutorial 1 - Hello World!</a>
-      <a href="/tutorial_2">NPM Tutorial 2 - Bundling!</a>
-      <h2>NPM Tutorial 2 - Bundling!</h2>
+      <a href="/tutorial_2">NPM Tutorial 2 - Reverse Proxy!</a>
+      <a href="/tutorial_3">NPM Tutorial 3 - TBA</a>
+      <h2>NPM Tutorial 3 - Reverse Proxy!</h2>
       <div class="steps">
-        <h3>Installing Webpack</h3>
+        <h3>Intro</h3>
         <p>
-          This tutorial will explain how to bundle a node.js project into a
-          Client Side Rendered Single Page Application. (CSR SPA)
-        </p>
-        <p>
-          Bundling up a project so that it contains the entry point, program,
-          assets, and all the project dependencies in a distributable package
-          requires one of many different suitable bundlers, like webpack,
-          browserify, esbuild, rollup, parcel, and my favourite which somehow
-          isn't in this list... VITE
-        </p>
-        <p>
-          Of course you could write your own bundler, which sources and
-          minimises all of the different javascript files, modules & assets in
-          your project and pushes them into a distribution folder, and perfects
-          every single little load time bottlneck, but when there are already
-          projects like webpack around with THOUSANDS of stars on GitHub,
-          trusted by React and Vue and other Framework Developers, there isn't
-          much point doing it all again, unless like Rich Harris you find
-          something inhernently and disturbingly wrong with what already exists,
-          and you write something better. (SvelteKit)
-        </p>
-        <p>
-          I need to explain a hell of a lot of interesting concepts here in this
-          second part of the tutorial, so it might be a lot to read, but it's
-          important information.
-        </p>
-        <p>
-          Of course Node.JS runs locally on your own computer, as a production
-          or development process, it has access to all of your files, and it can
-          do what it needs to do on the fly to basically process what you've
-          written in a single parse. You cannot run Node.JS in a browser,
-          (technically there are about 5 ways that you can, but they're like
-          running Java in a browser... Bloaty McDisgusing. So you have to
-          basically rewrite what all the Node.JS stuff is doing into a JS
-          standard that the browser can deal with. A browser only supports a set
-          of particular ECMA Standards. You can find a list of supported
-          standards for all browsers here.
-          <a href="https://kangax.github.io/compat-table/es6/"
-            >ES6 Compatibility</a
-          >
-          As you can see from this lovely chart... this is one of the things
-          that make developers who use Python go 'OH MY GOD JAVASCRIPT, NO WAY!
-          NOT EVEN ONCE'
-        </p>
-        <p>
-          ECMA Stands for European Computer Manufacturer's Association. ECMA
-          Script is shortened to ES, which aligns with what you've probably seen
-          written all over the internet like ES6, ES5, etc... ES5 is the 5th
-          version of the standardised scripting language for javascript, it was
-          published in 2015.
-        </p>
-        <p>
-          When you run a Javascript application on a browser you have to ensure
-          that the Javascript you're providing will be an ECMA Script that the
-          browser supports, although when you write a Javascript application,
-          unless you're super strict about your coding adhereance to ECMA you'll
-          probably alternate between ES4, ES5, ES6, ES7, TypeScript, then of
-          course you're pulling in other peoples modules which could be written
-          in literally anything as well, and we haven't even touched on CSS,
-          PostCSS, SCSS, Less, etc... which will also need to be provided as
-          CSS3.
-        </p>
-        <p>
-          So basically we cannot just compile a distribution from a node.js
-          application and hope it works, we have to transpile all of the code in
-          a node.js project into a widely supported ECMAScripted output. We also
-          have to ensure that there are no unsupported modules included in the
-          node.js project before we do this... like node.fs, because obviously
-          browsers don't have a filesystem, and the transpiliation will not
-          succeed.
-        </p>
-        <p>
-          For this project to transpile and package everything that we have so
-          far... we will use a combination of Babel, Webpack and a few other
-          helpers, it's a lot of stuff, and the config can be confusing, but
-          once you've done it a few times you get the hang of it, and it all
-          makes perfect sense.
-        </p>
-        <p>
-          The first step you'll need to do is install all of these new developer
-          tools with the following command.
-        </p>
-        <div class="copy-link">
-          <input
-            type="text"
-            class="copy-link-input"
-            value="npm i webpack webpack-cli babel-loader babel-polyfill @babel/core @babel/preset-env acorn -D"
-            disabled
-          />
-          <button
-            type="button"
-            class="copy-link-button"
-            onclick="copyCommand('npm i webpack webpack-cli babel-loader babel-polyfill @babel/core @babel/preset-env acorn -D')"
-          >
-            <span class="material-icons">content_copy</span>
-          </button>
-        </div>
-        <p>
-          We are saving all of these tools as a devDependency because after they
-          are used to bundle the application they are not needed in the
-          distributable runtime.
+          This tutorial will explain how to host a node.js service running
+          privately on our own host halide.michaelcuneo.com.au behind a reverse
+          Proxy.
         </p>
       </div>
       <div class="steps">
-        <h3>Add an area to output your build & test the output directory</h3>
-        <p>Create a folder to export the build to</p>
-        <div class="copy-link">
-          <input
-            type="text"
-            class="copy-link-input"
-            value="mkdir dist"
-            disabled
-          />
-          <button
-            type="button"
-            class="copy-link-button"
-            onclick="copyCommand('mkdir dist')"
-          >
-            <span class="material-icons">content_copy</span>
-          </button>
-        </div>
-        <p>Test webpack.</p>
+        <h3>Set up Apache with a new host.</h3>
+        <p>Login to HALIDE via SSH to your local user account.</p>
+        <p>Change directory to /etc/apache/sites-available</p>
+        <p>
+          Duplicate an existing site with cp and change all of the configuration
+          to suit running a reverse proxy from Port 80 to Port 3000 on a node.js
+          application. For this example I will be using the Reverse Proxy
+          example to host this tutorial set.
+        </p>
+        <p>
+          sudo cp 001-halide-michaelcuneo-com-au.conf
+          009-node-michaelcuneo.com.au.conf
+        </p>
+        <p>
+          Open up 009-node-michaelcuneo.com.au.conf and edit it to change all of
+          the values to suit reverse proxying.
+        </p>
+        <p>
+          You want to keep the Virtual Host receiving *:80, because you are
+          listening to incoming connections on Port 80
+        </p>
+        <p>Server Admin is your own personal email.</p>
+        <p>
+          Server Name and Server Alias should both be set to the subdomain that
+          you want to use under michaelcuneo.com.au ... or if you're setting
+          this up for your own services, [appname].aidenbc.com.au
+        </p>
+        <p>
+          Document Root can be removed because a node.JS does not have one... it
+          manages this using it's own runtime services.
+        </p>
+        <p>
+          Error Log and Custom log can be renamed to suit the service you're
+          running for Customised dedicated logging.
+        </p>
+        <p>
+          You want to add these three lines to the config to support reverse
+          proxying. For this project I have used the port 3050 so that it
+          doesn't interfere with my development that generally sits on 3000.
+          ProxyPreserveHost On ProxyPass / http://localhost:3050/
+          ProxyPassReverse / http://localhost:3050/
+        </p>
+        <p>
+          You can also remove any rewrite conditions so that the resulting file
+          looks something like this one that I made for this tutorial hosting.
+          The Rewrite Conditions will be re-added later when Certbot does it
+          business.
+        </p>
+        <p>
+          After you have a site config completed you have to enable it with the
+          following commands, a2ensite stands for Apache 2 Enable Site, and will
+          copy the configuration to the sites-enabled folder and make it
+          readable by Apache to launch when restarted. Then restart apache with
+          the System Controller.
+        </p>
+        <p>sudo a2ensite example.com sudo systemctl restart apache2</p>
+        <p>
+          Because we want SSL support, we can easily add a new config that adds
+          a VirtualHost listening on *:443 and provides Security Certificates
+          with CERTBOT, but before we can do this we have to have the domain
+          resolvable so we have to login to AWS and add a Route53 Subdomain for
+          this app, so that when you hit node.michaelcuneo.com.au the Route53
+          service sends the requests to the IP of the server,
+          michaelcuneo.com.au or aidenbc.com.au.
+        </p>
+        <p>
+          Before we login to Amazon we need to find out what the current IP of
+          HALIDE is... using the same script that we use in the 'IP Update
+          scripts' for our other domain endpoints. curl ifconfig.me
+        </p>
+        <p>
+          Now that we have an IP to add to the Route53 Subdomain. We can login
+          to AWS.
+        </p>
+        <p>
+          After you're in to AWS search for Route53 up the top area, and you can
+          get to Route53
+        </p>
+        <p>
+          For our service you'll see that we have 7 hosted zones. If you click
+          on Hosted Zones you'll see we have quite a few. You want to edit
+          michaelcuneo.com.au or aidenbc.com.au
+        </p>
+        <p>
+          I clicked on michaelcuneo.com.au and I have a lot of records... 28 to
+          be exact... some are to route the MX mailservice to Google Mail, some
+          are for projects, some are to validate that I own michaelcuneo.com.au
+        </p>
+        <p>To add a new subdoain just clicked Create Record</p>
+        <p>
+          Under subdomain this is where you write the name of the app like you
+          did in the configuration for Apache, [appname].michaelcuneo.com.au or
+          [appname].aidenbc.com.au
+        </p>
+        <p>
+          You want the record type to be an A Record, and you want the value to
+          be the IP that you got from the curl ifconfig.me command. This IP is
+          currently 114.76.75.20. Every other setting you can leave default, and
+          hit 'Create Record'
+        </p>
+        <p>
+          If you wait about 30 seconds now... ping [appname].michaelcuneo.com.au
+          or [appname].aidenbc.com.au should resolve to 114.76.75.20
+        </p>
+        <p>
+          Now that the domain is resolving to the HALIDE server, we can use the
+          Certbot to receive a valid SSL certification from the CERTBOT
+          endpoint. Part of this validation requires that CERTBOT can see that
+          we own the domain, and if the domain does not point to where we're
+          running CERTBOT from it will deny the validation and we get no SSL.
+        </p>
+        <p>
+          Getting a config for SSL over port *:443 is as simple as running sudo
+          certbot, when you run Certbot you will see a list of domains that
+          we're hosting on HALIDE, just type the number beside the domain that
+          you have added to the apache service, hit enter, and everything else
+          should be automatic, and you'll be gifted a brand new configuration by
+          certbot for ssl. But again, like before, it won't be active yet,
+          restart apache to allow it to read the new configuration for SSL. sudo
+          systemctl restart apache2
+        </p>
+        <p>
+          At this point if you go to [appname].michaelcuneo.com.au or
+          [appname].aidenbc.com.au it should tell you that the service in
+          unavailable because nothing is running on port 3050.
+        </p>
       </div>
     </div>
     <!-- Entry Point for the Application -->

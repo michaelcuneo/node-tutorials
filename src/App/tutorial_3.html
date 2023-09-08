@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Fira+Code&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/tutorial_1">NPM Tutorial 1 - Hello World!</a>
+      <a href="/tutorial_2">NPM Tutorial 2 - Reverse Proxy!</a>
+      <a href="/tutorial_3">NPM Tutorial 3 - TBA</a>
+      <h2>NPM Tutorial 3 - TBA!</h2>
+      <div class="steps">
+        <h3>Installing Webpack</h3>
+        <p>
+          This tutorial will explain how to bundle a node.js project into a
+          Client Side Rendered Single Page Application. (CSR SPA)
+        </p>
+        <p>
+          Bundling up a project so that it contains the entry point, program,
+          assets, and all the project dependencies in a distributable package
+          requires one of many different suitable bundlers, like webpack,
+          browserify, esbuild, rollup, parcel, and my favourite which somehow
+          isn't in this list... VITE
+        </p>
+        <p>
+          Of course you could write your own bundler, which sources and
+          minimises all of the different javascript files, modules & assets in
+          your project and pushes them into a distribution folder, and perfects
+          every single little load time bottlneck, but when there are already
+          projects like webpack around with THOUSANDS of stars on GitHub,
+          trusted by React and Vue and other Framework Developers, there isn't
+          much point doing it all again, unless like Rich Harris you find
+          something inhernently and disturbingly wrong with what already exists,
+          and you write something better. (SvelteKit)
+        </p>
+        <p>
+          I need to explain a hell of a lot of interesting concepts here in this
+          second part of the tutorial, so it might be a lot to read, but it's
+          important information.
+        </p>
+        <p>
+          Of course Node.JS runs locally on your own computer, as a production
+          or development process, it has access to all of your files, and it can
+          do what it needs to do on the fly to basically process what you've
+          written in a single parse. You cannot run Node.JS in a browser,
+          (technically there are about 5 ways that you can, but they're like
+          running Java in a browser... Bloaty McDisgusing. So you have to
+          basically rewrite what all the Node.JS stuff is doing into a JS
+          standard that the browser can deal with. A browser only supports a set
+          of particular ECMA Standards. You can find a list of supported
+          standards for all browsers here.
+          <a href="https://kangax.github.io/compat-table/es6/"
+            >ES6 Compatibility</a
+          >
+          As you can see from this lovely chart... this is one of the things
+          that make developers who use Python go 'OH MY GOD JAVASCRIPT, NO WAY!
+          NOT EVEN ONCE'
+        </p>
+        <p>
+          ECMA Stands for European Computer Manufacturer's Association. ECMA
+          Script is shortened to ES, which aligns with what you've probably seen
+          written all over the internet like ES6, ES5, etc... ES5 is the 5th
+          version of the standardised scripting language for javascript, it was
+          published in 2015.
+        </p>
+        <p>
+          When you run a Javascript application on a browser you have to ensure
+          that the Javascript you're providing will be an ECMA Script that the
+          browser supports, although when you write a Javascript application,
+          unless you're super strict about your coding adhereance to ECMA you'll
+          probably alternate between ES4, ES5, ES6, ES7, TypeScript, then of
+          course you're pulling in other peoples modules which could be written
+          in literally anything as well, and we haven't even touched on CSS,
+          PostCSS, SCSS, Less, etc... which will also need to be provided as
+          CSS3.
+        </p>
+        <p>
+          So basically we cannot just compile a distribution from a node.js
+          application and hope it works, we have to transpile all of the code in
+          a node.js project into a widely supported ECMAScripted output. We also
+          have to ensure that there are no unsupported modules included in the
+          node.js project before we do this... like node.fs, because obviously
+          browsers don't have a filesystem, and the transpiliation will not
+          succeed.
+        </p>
+        <p>
+          For this project to transpile and package everything that we have so
+          far... we will use a combination of Babel, Webpack and a few other
+          helpers, it's a lot of stuff, and the config can be confusing, but
+          once you've done it a few times you get the hang of it, and it all
+          makes perfect sense.
+        </p>
+        <p>
+          The first step you'll need to do is install all of these new developer
+          tools with the following command.
+        </p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="npm i webpack webpack-cli babel-loader babel-polyfill @babel/core @babel/preset-env acorn -D"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('npm i webpack webpack-cli babel-loader babel-polyfill @babel/core @babel/preset-env acorn -D')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <p>
+          We are saving all of these tools as a devDependency because after they
+          are used to bundle the application they are not needed in the
+          distributable runtime.
+        </p>
+      </div>
+      <div class="steps">
+        <h3>Add an area to output your build & test the output directory</h3>
+        <p>Create a folder to export the build to</p>
+        <div class="copy-link">
+          <input
+            type="text"
+            class="copy-link-input"
+            value="mkdir dist"
+            disabled
+          />
+          <button
+            type="button"
+            class="copy-link-button"
+            onclick="copyCommand('mkdir dist')"
+          >
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <p>Test webpack.</p>
+      </div>
+    </div>
+    <!-- Entry Point for the Application -->
+    <script type="module" src="./index.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

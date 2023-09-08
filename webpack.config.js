@@ -11,33 +11,36 @@ const __dirname = path.dirname(__filename);
 export default {
   entry: { main: ["./src/server.js"] },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, "dist"),
     filename: "bundle.js",
     publicPath: "/src/public",
     clean: true,
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   module: {
-  rules: [
-    {
-      test: /\.m?js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
-        }
-      }
-    },
-    {
-      test: /\.css$/i,
-      use: ['style-loader', 'css-loader'],
-    },
-  ]
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
-  plugins: [new NodePolyfillPlugin(), new HtmlWebpackPlugin({
-    template: './src/index.html',
-  })],
+  plugins: [
+    new NodePolyfillPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+    }),
+  ],
   mode: "development",
   target: "node",
   externals: [nodeExternals()],
