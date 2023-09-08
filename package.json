@@ -6,11 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development webpack --mode development",
-    "build": "NODE_ENV=production webpack --mode production"
+    "prod": "NODE_ENV=production webpack --mode production",
+    "serve": "node ./src/server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.22.15",
     "@babel/core": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
     "babel-loader": "^9.1.3",
